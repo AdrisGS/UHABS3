@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import uhv1.Negocio.Evento;
 import uhv1.Negocio.Responsable;
 import uhv1.Negocio.pagos;
 import uhv1.Persistencia.ManejadorBD;
@@ -22,6 +23,8 @@ import uhv1.Persistencia.ManejadorBD;
 public class DAOPagos {
     
     Responsable  hab;
+    Evento even;
+    pagos pago;
     
     public DAOPagos(){
     }
@@ -44,6 +47,29 @@ public class DAOPagos {
              e.printStackTrace();
              return null;
         }        
+    }
+    
+    //Metodo que registra los datos de objeto pago en la tabla Pagos de la base de datos
+    public boolean creaPagoEvento(pagos pago) {
+
+        int llave;
+        try {
+            // Crea el statement
+            Statement statement = ManejadorBD.dameConnection().createStatement();
+            statement.execute("INSERT into Pagos (fecha, monto, Habitantes_idHabitante, concepto, saldo_actual) values ('" + pago.getFecha() + "', " + pago.getMonto() + "," + pago.getId_habitante() + "," + pago.getConcepto() + "," + pago.getMonto() + ");", Statement.RETURN_GENERATED_KEYS); //insertando los datos de objeto pago en tabla Pagos
+
+            ResultSet rs = statement.getGeneratedKeys(); // Recupera la llave primaria de la tabla Pagos
+
+            if (rs != null && rs.next()) {
+                llave = rs.getInt(1);
+                
+                pago.setId(llave); // Asigna la llave primaria al pago
+            }
+            return true;
+        } catch (SQLException e) {
+            return false;
+        }
+
     }
 }
      

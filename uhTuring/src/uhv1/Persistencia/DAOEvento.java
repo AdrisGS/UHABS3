@@ -122,4 +122,18 @@ public class DAOEvento {
             return false;
         }
     }
+     //Metodo que busca el registro de la tabla Evento en base de datos por medio de IdEvento y actualiza el saldo
+    public boolean actualizaAbonoEvento(Evento eve){
+        
+        try {
+            Statement statement = ManejadorBD.dameConnection().createStatement();
+            statement.execute("UPDATE Evento SET saldo=" + eve.getSaldo() + "WHERE idEvento =" + eve.getId() + ";");
+            return true;
+            
+        } catch (SQLException e) {
+            System.out.println("No fue posible el ingreso de saldo");
+            e.printStackTrace();
+            return false;
+        }
+    }
 }

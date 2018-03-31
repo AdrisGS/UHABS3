@@ -48,7 +48,7 @@ public class ManejadorBD
 	        // Se puede especificar un usuario y un password
 	        Properties props = new Properties();
 	        props.put("user", "root");
-	        props.put("password", "root");
+	        props.put("password", "");
 
 	        /*
 	           En la conexion se especifica create=true para crear la base de datos

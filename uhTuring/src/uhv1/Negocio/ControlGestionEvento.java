@@ -30,9 +30,9 @@ public class ControlGestionEvento {
          ControlPrincipal ctrlPrincipal = new ControlPrincipal();
          ctrlPrincipal.inicia();
      } 
-     
+     // Se crea instancia de ControlAbonaEvento y se envia parametros DAOEvento y Evento a su constructor
      public void abonaEvento(){
-         ControlAbonaEvento abonaEvento = new ControlAbonaEvento();
-         abonaEvento.inicia();
+         ControlAbonaEvento abonaEvento = new ControlAbonaEvento(dahoeven, even);
+         abonaEvento.inicia();   // Se invoca metodo inicia de clase ControlAbonaEvento el cual apertura la ventana para registrar el saldo
      }
 }

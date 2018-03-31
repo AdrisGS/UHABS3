@@ -5,6 +5,10 @@
  */
 package uhv1.Vistas;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import uhv1.Negocio.ControlAbonaEvento;
 
 /**
@@ -17,6 +21,7 @@ public class VentanaAbonaEvento extends javax.swing.JFrame {
      * Creates new form VetanaAbonaEvento
      */
     ControlAbonaEvento control;
+    double saldo;
     public VentanaAbonaEvento(ControlAbonaEvento control) {
         this.control=control;
         initComponents();
@@ -32,7 +37,7 @@ public class VentanaAbonaEvento extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jtxtSaldo = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -43,8 +48,8 @@ public class VentanaAbonaEvento extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Cantidad:          $");
 
-        jTextField1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtxtSaldo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jtxtSaldo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         jButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jButton1.setText("Aceptar");
@@ -77,7 +82,7 @@ public class VentanaAbonaEvento extends javax.swing.JFrame {
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtxtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(78, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
@@ -93,7 +98,7 @@ public class VentanaAbonaEvento extends javax.swing.JFrame {
                 .addGap(60, 60, 60)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtxtSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(66, 66, 66)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -106,12 +111,30 @@ public class VentanaAbonaEvento extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        control.aceptaAbonar();
+        // Boton "Aceptar", valida que el campo de Saldo no sea vacio y manda diversos mensajes de notificacion
+        boolean estatus;
+        
+        if(jtxtSaldo.getText().isEmpty()){                         // Si campo saldo esta vacio emite mensaje de notificacion
+            JOptionPane.showMessageDialog(this, "El campo esta vacio, es necesario la captura de números");    
+        }else{
+            saldo = Double.parseDouble(jtxtSaldo.getText());       //cast String a double, ya que el campo saldo el sistema lo contempla como String
+            System.out.println("Antes de registra saldo");
+            estatus = control.registraSaldo(saldo);     //La variable saldo es enviada al metodo registraSaldo del control para su modificacion y recibe un boolean como respuesta                            
+            control.registraPago();                     // Manda a llamar metodo  registraPago para crear objeto pago
+            System.out.println("Despues de registra saldo");
+            if(estatus){                                           // Si saldo de actualizo correctamente emite mensaje de exito
+                JOptionPane.showMessageDialog(this, "Se agrego el saldo exitosamente");
+            }else{                                                 // Si saldo no se actualizo correctamente emite mensaje de error
+                JOptionPane.showMessageDialog(this, "Hubo un problema para registrar el saldo en sistema");
+            }
+        }
+        //control.aceptaAbonar();
        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        //Al presionar boton Cancelar, manda a llamar al metodo botonCancelar del ControlAbonaEvento para mostar ventana principal 
+        control.botonCancelar();
     }//GEN-LAST:event_jButton2ActionPerformed
 
    
@@ -121,6 +144,6 @@ public class VentanaAbonaEvento extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jtxtSaldo;
     // End of variables declaration//GEN-END:variables
 }

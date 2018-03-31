@@ -5,6 +5,8 @@
  */
 package uhv1.Negocio;
 
+import java.sql.Date;
+
 /**
  *
  * @author darky

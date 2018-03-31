@@ -102,9 +102,9 @@ public class VentanaGestionEvento extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         control.botonCancelar();
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    //Boton Abona Evento, manda a llamar el metodo botonAbonar de la clase ControlGestionaEvento
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        dispose();
         control.abonaEvento();
     }//GEN-LAST:event_jButton3ActionPerformed
 
