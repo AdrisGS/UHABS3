@@ -21,7 +21,7 @@ public class ControlVentanaAdministrar {
     }
     
     public void controlCargoDelMes(){
-        ControlCargoDelMes CCDM = new ControlCargoDelMes ();
+        ControlVentanaCargoDelMes CCDM = new ControlVentanaCargoDelMes ();
         CCDM.inicia();
     }
     
