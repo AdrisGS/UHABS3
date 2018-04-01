@@ -7,6 +7,7 @@ package uhv1.Persistencia;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import uhv1.Negocio.Casa;
 import uhv1.Negocio.Responsable;
 import uhv1.Persistencia.ManejadorBD;
@@ -125,5 +126,37 @@ public class DAOHabitantes {
             return false;
         }
 
+    }
+    public Responsable[] dameHabitantes(){
+        ArrayList<Responsable> arrHabitantes = new ArrayList<Responsable>();
+        
+        try {
+            Statement statement = ManejadorBD.dameConnection().createStatement();
+            ResultSet rs = statement.executeQuery("SELECT * FROM Habitantes;");
+            while(rs.next()){               
+                Responsable res = new Responsable(rs.getInt("idHabitante"), rs.getString("nombre"), rs.getString("aPat"), rs.getString("aMat"), rs.getFloat("telefono"), null, rs.getFloat("Saldo"));
+                arrHabitantes.add(res);                
+            }
+            Responsable arregloTemp[] = new Responsable[arrHabitantes.size()];
+            arrHabitantes.toArray(arregloTemp);
+            return arregloTemp;
+        } catch (SQLException e) {            
+            e.printStackTrace();
+            return null;
+        }        
+    }
+    public boolean actualizaHabitante(Responsable habitante){
+         try {            
+            Statement statement = ManejadorBD.dameConnection().createStatement();
+            statement.execute("UPDATE habitantes SET nombre='" + habitante.getNombre() + "', aPat='" 
+                    + habitante.getaPat() + "', aMat='" + habitante.getaMat() + "', telefono=" 
+                    + habitante.getTelefono() + ", Saldo =" + habitante.getSaldo() +" where idHabitante = '" + habitante.getId() + "';");
+            return true;
+            
+        } catch (SQLException e) {
+            System.out.println("No se pudo modificar");
+            e.printStackTrace();
+            return false;
+        }        
     }
 }
