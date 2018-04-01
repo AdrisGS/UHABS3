@@ -15,7 +15,8 @@ import uhv1.Vistas.VentanaAbonaEvento;
 public class ControlAbonaEvento {
     
     
-    
+    private Evento evento;
+    private pagos pago;
     
     public void inicia(){
         VentanaAbonaEvento ventaAbona = new VentanaAbonaEvento(this);
@@ -23,8 +24,7 @@ public class ControlAbonaEvento {
     }
     
     public void aceptaAbonar(){
-        ControlImprimeAbonoE CIA = new ControlImprimeAbonoE();
-        
-        CIA.imprimeAbono();
+        ControlVentanaImprimeComprobante CIA = new ControlVentanaImprimeComprobante(evento, pago);        
+        CIA.iniciar();
     }
 }
