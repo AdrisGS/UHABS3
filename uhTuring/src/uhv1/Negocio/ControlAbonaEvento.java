@@ -53,31 +53,19 @@ public class ControlAbonaEvento {
         DAOPagos daoPagos = new DAOPagos();
         
         boolean estado;   
-        
-        String fecha = convertStringToDate(even.getFechaReservacion()); //Manda la viarble fecha de reservacion a metodo que convierte tipo de dato Date a String
-        //System.out.println("en controlAbonaEvento convirtiendo date a string " + fecha);
-        pago = new pagos(0, fecha, even.getSaldo(), even.getHabitante().getId(), even.getEstado()); //creando objeto pago
+   
+       
+        pago = new pagos (0, even.getFechaReservacion(), even.getSaldo(), even.getHabitante().getId(), even.getEstado(), even.getSaldo());//creando objeto pago
         
         
         estado = daoPagos.creaPagoEvento(pago); //eenviando objeto pago a DAOPago para su registro en base de datos
         return estado;
     }
+    
     //Metodo  que muestra la ventana principal del sistema
     public void botonCancelar(){
         ControlPrincipal ctrlPrincipal = new ControlPrincipal();
         ctrlPrincipal.inicia();
     }
     
-    //Metodo que convierte variable de tipo Date a String
-    public String convertStringToDate(Date indate){
-        String dateString = null;
-        SimpleDateFormat sdfr = new SimpleDateFormat("dd/MM/yyyy");
-        
-        try{
-            dateString = sdfr.format( indate );
-        }catch (Exception ex ){
-            System.out.println(ex);
-        }
-        return dateString;
-    }
 }

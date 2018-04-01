@@ -56,7 +56,7 @@ public class DAOPagos {
         try {
             // Crea el statement
             Statement statement = ManejadorBD.dameConnection().createStatement();
-            statement.execute("INSERT into Pagos (fecha, monto, Habitantes_idHabitante, concepto, saldo_actual) values ('" + pago.getFecha() + "', " + pago.getMonto() + "," + pago.getId_habitante() + "," + pago.getConcepto() + "," + pago.getMonto() + ");", Statement.RETURN_GENERATED_KEYS); //insertando los datos de objeto pago en tabla Pagos
+            statement.execute("INSERT into Pagos (fecha, monto, Habitantes_idHabitante, concepto, saldo_actual) values ('" + pago.getFechasql() + "', " + pago.getMonto() + "," + pago.getId_habitante() + "," + pago.getConcepto() + "," + pago.getSaldoActual() + ");", Statement.RETURN_GENERATED_KEYS); //insertando los datos de objeto pago en tabla Pagos
 
             ResultSet rs = statement.getGeneratedKeys(); // Recupera la llave primaria de la tabla Pagos
 
