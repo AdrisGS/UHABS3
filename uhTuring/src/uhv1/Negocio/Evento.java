@@ -26,7 +26,7 @@ public class Evento {
     }
 
     Evento(String nombre, Date fechaReservacion, float saldo, String descripcion, Responsable habitante, int estado) {
-       this.nombre = nombre;
+        this.nombre = nombre;
         this.fechaReservacion = fechaReservacion;
         this.descripcion = descripcion;
         this.saldo = saldo;

@@ -13,7 +13,7 @@ import java.sql.Date;
  */
 public class pagos {
     private int id;
-    private String fecha;
+    private String fecha;  
     private float monto;
     private int id_habitante;
     private int concepto;
@@ -25,10 +25,10 @@ public class pagos {
         this.fecha = fecha;
         this.monto = monto;
         this.id_habitante = id_habitante;
-        this.concepto = concepto;        
+        this.concepto = concepto;
+        
     }
-
-    public pagos(int id, Date fechasql, float monto, int id_habitante, int concepto, float saldoActual){
+public pagos(int id, Date fechasql, float monto, int id_habitante, int concepto, float saldoActual){
         this.id = id;
         this.fechasql = fechasql;
         this.monto = monto;
