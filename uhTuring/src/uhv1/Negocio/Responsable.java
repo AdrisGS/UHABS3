@@ -29,7 +29,7 @@ public class Responsable {
         this.aMat = aMat;
         this.telefono = telefono;
         this.casa = casa;
-        this.telefono = saldo;                
+        this.saldo = saldo;                
     }
 
     @Override

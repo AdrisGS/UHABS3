@@ -31,13 +31,6 @@ public class ControlAbonaEvento {
         this.even = even;
     }
     
-    /*public ControlAbonaEvento(VentanaAbonaEvento ventanaAbona){
-        this.ventanaAbona = ventanaAbona;
-    }*/
-    
-    public ControlAbonaEvento(){
-    }
-    
     //Metodo que crea una instancia de VentanaAbonaEvento y apertura la aventana al usuario
     public void inicia(){
         VentanaAbonaEvento ventaAbona = new VentanaAbonaEvento(this);
@@ -47,9 +40,8 @@ public class ControlAbonaEvento {
     }
     
     public void aceptaAbonar(){
-        ControlImprimeAbonoE CIA = new ControlImprimeAbonoE();
-        
-        CIA.imprimeAbono();
+        ControlVentanaImprimeComprobante CIA = new ControlVentanaImprimeComprobante(evento, pago);        
+        CIA.iniciar();
     }
     
     //Metodo que actualiza la vaiable saldo desde Entidad Evento y envia a DAO el objeto Evento para actaulizar en base de datos
