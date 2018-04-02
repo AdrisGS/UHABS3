@@ -21,12 +21,15 @@ public class VentanaAbonaEvento extends javax.swing.JFrame {
      * Creates new form VetanaAbonaEvento
      */
     ControlAbonaEvento control;
-    double saldo;
+    
     public VentanaAbonaEvento(ControlAbonaEvento control) {
         this.control=control;
+        
         initComponents();
     }
-
+    public VentanaAbonaEvento(){
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -111,34 +114,26 @@ public class VentanaAbonaEvento extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        // Boton "Aceptar", valida que el campo de Saldo no sea vacio y manda diversos mensajes de notificacion
-        boolean estatus;
-        
-        if(jtxtSaldo.getText().isEmpty()){                         // Si campo saldo esta vacio emite mensaje de notificacion
-            JOptionPane.showMessageDialog(this, "El campo esta vacio, es necesario la captura de números");    
-        }else{
-            saldo = Double.parseDouble(jtxtSaldo.getText());       //cast String a double, ya que el campo saldo el sistema lo contempla como String
-            System.out.println("Antes de registra saldo");
-            estatus = control.registraSaldo(saldo);     //La variable saldo es enviada al metodo registraSaldo del control para su modificacion y recibe un boolean como respuesta                            
-            control.registraPago();                     // Manda a llamar metodo  registraPago para crear objeto pago
-            System.out.println("Despues de registra saldo");
-            if(estatus){                                           // Si saldo de actualizo correctamente emite mensaje de exito
-                JOptionPane.showMessageDialog(this, "Se agrego el saldo exitosamente");
-            }else{                                                 // Si saldo no se actualizo correctamente emite mensaje de error
-                JOptionPane.showMessageDialog(this, "Hubo un problema para registrar el saldo en sistema");
-            }
-        }
-        //control.aceptaAbonar();
-       
+        // Boton "Aceptar", captura y envia el saldo registrado por el usuario al ControlAbonaEvento       
+            control.registraSaldo(jtxtSaldo.getText());     //La variable saldo es enviada al metodo registraSaldo del control para su modificacion y recibe un boolean como respuesta                                   
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         //Al presionar boton Cancelar, manda a llamar al metodo botonCancelar del ControlAbonaEvento para mostar ventana principal 
         control.botonCancelar();
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    
+    public void mensajeSaldoExitoso(){
+        JOptionPane.showMessageDialog(this, "Se agrego el saldo exitosamente");
+    }
    
-
+    public void mensajeCampoVacio(){
+        JOptionPane.showMessageDialog(this, "El campo esta vacio o contiene letras, favor de capturar solo numeros");
+    }
+    
+    public void mensajeErrorSaldo(){
+        JOptionPane.showMessageDialog(this, "Hubo un problema para registrar el saldo en sistema");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

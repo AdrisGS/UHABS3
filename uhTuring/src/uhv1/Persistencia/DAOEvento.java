@@ -15,7 +15,9 @@ import uhv1.Persistencia.ManejadorBD;
  * @author darky
  */
 public class DAOEvento {
+    public DAOEvento(){
     
+    }
    public Evento buscaEvento(String nombre) {
         
         String nomE;
