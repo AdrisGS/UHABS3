@@ -24,6 +24,7 @@ public class ControlAbonaEvento {
     pagos pago;
     //VentanaAbonaEvento ventanaAbona;
     float sald;
+    java.sql.Date fechasql;
     
     //Constructor que recibe como parametros objeto Evento y DAOEvento
     public ControlAbonaEvento(DAOEvento dahoeven, Evento even) {
@@ -52,12 +53,16 @@ public class ControlAbonaEvento {
         
         VentanaAbonaEvento ventanaAbona = new VentanaAbonaEvento();   //Se crea instancia de VentanaAbonaEvento para mandar a llamar metodos de notificacion a usuario
         float sald;
+        float saldoAnterior;
+        float saldoActual;
         boolean capturado;
         boolean status = validaCadena(saldo);        //Este metodo valida si la cadena saldo es vacia o contiene letras devolviendo false, pero si contiene unicamente numeros devuelve true
             
             if(status){      //Si la cadena saldo contiene unicamente numeros                                     
                 sald = Float.parseFloat(saldo);      //se convierte la variable saldo en tipo Float y se guarda en variable sald
-                even.setSaldo(sald);                 //actualizando variable saldo de objeto Evento mediante setSaldo pasando como parametro la variable sald
+                saldoAnterior = even.getSaldo();       //Se guarda el saldo de la entidad del evento en la variable saldoAnterior 
+                saldoActual = saldoAnterior + sald;       //suma la variable saldoAnterior con el saldo que registro el usuario y se gurada en variable saldoActual
+                even.setSaldo(saldoActual);                 //actualizando variable saldoActual de objeto Evento mediante setSaldo pasando como parametro la variable sald
                 ventanaAbona.mensajeSaldoExitoso();               // Si saldo se actualizo correctamente emite mensaje de exito al usuario
                                                                          
                 capturado = dahoeven.actualizaAbonoEvento(even);    //Se envia el objeto Evento al DAOEvento por medio de su metodo actualizaAbonoEvento y recibe como respuesta un boolean
@@ -67,7 +72,7 @@ public class ControlAbonaEvento {
                 ventanaAbona.mensajeCampoVacio();
                 capturado = false;
             }
-                     
+        
         return capturado;
         
     }
@@ -85,8 +90,11 @@ public class ControlAbonaEvento {
     //Metodo que genera objeto pagos y lo envia a clase DAOPagos para crear el registro en la Base de datos 
     public boolean registraPago() {
         DAOPagos daoPagos = new DAOPagos();        
-        boolean estado;          
-        pago = new pagos (0, even.getFechaReservacion(), even.getSaldo(), even.getHabitante().getId(), even.getEstado(), even.getSaldo());//creando objeto pago
+        boolean estado;   
+        
+        java.util.Date fecha = new java.util.Date();//Se obtiene la fecha actual del sistema en una viariable Date 
+        fechasql = new java.sql.Date(fecha.getTime());  //Se asigana a la variable de tipo sqlDate, la fecha actual del sistema
+        pago = new pagos (0, fechasql, 400, even.getHabitante().getId(), even.getEstado(), even.getSaldo());//creando objeto pago
         estado = daoPagos.creaPagoEvento(pago); //eenviando objeto pago a DAOPago para su registro en base de datos
         return estado;
     }
