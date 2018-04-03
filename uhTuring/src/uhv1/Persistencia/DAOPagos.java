@@ -71,5 +71,25 @@ public class DAOPagos {
         }
 
     }
+    
+     public boolean creaPago(pagos pago){
+        int llave;
+        try {
+            // Crea el statement
+            Statement statement = ManejadorBD.dameConnection().createStatement();
+            // Envia instruccion SQL, nota el DEFAULT es para insertar la llave autogenerada            
+            statement.execute("INSERT into Pagos (fecha, monto, Habitantes_idHabitante, concepto, saldo_actual) values ('" + pago.getFechasql() + "'," + pago.getMonto() + "," + pago.getId_habitante() + "," + pago.getConcepto() + "," + pago.getSaldoActual() + ");", Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = statement.getGeneratedKeys(); // Recupera la llave
+
+            if (rs != null && rs.next()) {
+                llave = rs.getInt(1);                
+                pago.setId(llave); // Asigna la llave al habitante
+            }
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 }
      

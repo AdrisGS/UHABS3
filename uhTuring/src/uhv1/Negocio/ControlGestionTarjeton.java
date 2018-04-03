@@ -40,7 +40,7 @@ public class ControlGestionTarjeton {
     }
     
     public void cancelarTarjeton(){
-        ControlCancelaTarjeton cct = new ControlCancelaTarjeton(daotar,tar);
-        cct.inicia();
+        ControlCancelaTarjeton cct = new ControlCancelaTarjeton(res,daotar,tar);
+        cct.iniciar();
     }
 }

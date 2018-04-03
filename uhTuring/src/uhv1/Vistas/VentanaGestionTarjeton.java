@@ -6,6 +6,7 @@
     
 package uhv1.Vistas;
 
+import javax.swing.JOptionPane;
 import uhv1.Negocio.ControlGestionTarjeton;
 import uhv1.Negocio.Responsable;
 import uhv1.Negocio.Tarjeton;
@@ -155,8 +156,13 @@ public class VentanaGestionTarjeton extends javax.swing.JFrame {
 
     private void jButtonCancelaTarjetonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelaTarjetonActionPerformed
         // TODO add your handling code here:
-        control.cancelarTarjeton();
-        setVisible(false);
+        if(tar.length==0){
+            JOptionPane.showMessageDialog (null, "No tiene tarjetones activos");  
+        }else{
+            control.cancelarTarjeton();
+            setVisible(false);
+        }
+        
     }//GEN-LAST:event_jButtonCancelaTarjetonActionPerformed
 
     private void formAncestorMoved(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_formAncestorMoved

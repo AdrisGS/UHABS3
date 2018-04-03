@@ -31,6 +31,9 @@ public class ControlAbonaEvento {
         this.even = even;
     }
     
+    public ControlAbonaEvento(){
+        
+    }
     //Metodo que crea una instancia de VentanaAbonaEvento y apertura la aventana al usuario
     public void inicia(){
         VentanaAbonaEvento ventaAbona = new VentanaAbonaEvento(this);
@@ -40,7 +43,7 @@ public class ControlAbonaEvento {
     }
     
     public void aceptaAbonar(){
-        ControlVentanaImprimeComprobante CIA = new ControlVentanaImprimeComprobante(evento, pago);        
+        ControlVentanaImprimeComprobante CIA = new ControlVentanaImprimeComprobante(even, pago);        
         CIA.iniciar();
     }
     
@@ -59,7 +62,7 @@ public class ControlAbonaEvento {
                                                                          
                 capturado = dahoeven.actualizaAbonoEvento(even);    //Se envia el objeto Evento al DAOEvento por medio de su metodo actualizaAbonoEvento y recibe como respuesta un boolean
                 registraPago();                                    // Manda a llamar metodo  registraPago para crear objeto pago
-            
+                
             }else{                                                 // Si la cadena saldo es vacia o contiene letras emite un mensaje de error al usuario
                 ventanaAbona.mensajeCampoVacio();
                 capturado = false;

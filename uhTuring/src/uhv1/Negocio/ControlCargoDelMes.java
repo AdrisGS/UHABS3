@@ -74,7 +74,7 @@ public class ControlCargoDelMes {
     
     private boolean confirmaFecha(){
         int dia = fechaCalendar.get(Calendar.DAY_OF_MONTH); //Se obtiene el dia de la fecha actual
-        if(dia != 5){
+        if(dia != 9){
             return false;
         }
         return true;
