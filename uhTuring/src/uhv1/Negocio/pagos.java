@@ -5,16 +5,20 @@
  */
 package uhv1.Negocio;
 
+import java.sql.Date;
+
 /**
  *
  * @author darky
  */
 public class pagos {
     private int id;
-    private String fecha;
+    private String fecha;  
     private float monto;
     private int id_habitante;
     private int concepto;
+    private Date fechasql;
+    private float saldoActual;
     
     public pagos(int id, String fecha, float monto, int id_habitante, int concepto){
         this.id = id;
@@ -24,7 +28,18 @@ public class pagos {
         this.concepto = concepto;
         
     }
+public pagos(int id, Date fechasql, float monto, int id_habitante, int concepto, float saldoActual){
+        this.id = id;
+        this.fechasql = fechasql;
+        this.monto = monto;
+        this.id_habitante = id_habitante;
+        this.concepto = concepto;
+        this.saldoActual = saldoActual;        
+    }
 
+    public float getSaldoActual() {
+        return saldoActual;
+    }
     /**
      * @return the id
      */
@@ -93,6 +108,9 @@ public class pagos {
      */
     public void setConcepto(int concepto) {
         this.concepto = concepto;
+    }
+     public Date getFechasql() {
+        return fechasql;
     }
 
     @Override

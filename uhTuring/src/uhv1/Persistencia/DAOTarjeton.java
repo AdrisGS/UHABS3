@@ -19,29 +19,13 @@ import uhv1.Negocio.Tarjeton;
  * @author adriana gs
  */
 public class DAOTarjeton {
-    
-    
+       
     /*
+    En este metodo regresa la lista de los tarjetones que tiene un habitante 
+    buscando solamente los que están activos y que coinciden con el id de un habitante,
     
-    public pagos[] Recupera(Responsable hab){        
-        Statement statement;
-        ArrayList<pagos> pagosTemp = new ArrayList<pagos>();
-        try {
-            statement = ManejadorBD.dameConnection().createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM pagos where Habitantes_idHabitante =" + hab.getId() + ";");
-            while(rs.next()){ // mientras tenga datos que imprimir
-                pagos pago = new pagos(rs.getInt("idPago"), rs.getString("fecha"), rs.getFloat("monto"),rs.getInt("Habitantes_idhabitante"),rs.getInt("concepto"));
-                System.out.println(pago.getFecha());
-                pagosTemp.add(pago);
-            }
-            pagos pagosTempArreglo[] = new pagos[pagosTemp.size()];
-            pagosTemp.toArray(pagosTempArreglo);
-            return pagosTempArreglo;
-        }catch (SQLException e) {
-             e.printStackTrace();
-             return null;
-        }        
-    }
+    Este metodo recibe un mensaje de control baja dicho metodo ejecuta un query para eliminar
+    al habitante de la base de datos
     */
     public Tarjeton[] buscaTarjeton(int id){
        
@@ -71,6 +55,7 @@ public class DAOTarjeton {
             return null;
         }
     }
+
     public void bajaTarjeton(Tarjeton ton, Responsable hab) {
 
         try {
@@ -118,5 +103,52 @@ public class DAOTarjeton {
             return (false);
         }
     }   
+  
+    /*
+     En este metodo se le manda  el tarjeton de dicho habitante
+     para que su estado del tarjeton cambie a cancelado
+    */
+    public Boolean actulizarEstado(Tarjeton tarje) {
+        
+     try {
+            Statement statement = ManejadorBD.dameConnection().createStatement();
+
+            statement.execute("UPDATE tarjeton SET estado='" + tarje.getEstado()
+                    + "'  where num_estacionamiento = '" + tarje.getNum_estacionamiento()+ "';"
+            );
+            
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            
+            return false;
+        }
     
+    }
+    
+    /*
+    Este metodo busca el tarjeton buscado por numero de estacionamiento y que coincida el id de dicho habitante
+    y regresa el tarjeron que se requiere o null en caso de no existir
+    */
+    public Tarjeton buscarTarjetonNum (int numEstacionamiento, int idHabitante){
+        try {
+            
+            Statement statement = ManejadorBD.dameConnection().createStatement();
+            
+          
+            ResultSet rs=statement.executeQuery("SELECT * FROM tarjeton WHERE num_estacionamiento= '"+numEstacionamiento+"' AND Habitantes_idHabitante='"+idHabitante+"' AND estado='"+"Activo"+"';");
+            
+            rs.next();
+            Tarjeton tarjeton = new Tarjeton(rs.getInt("Habitantes_idHabitante"),rs.getInt("num_estacionamiento"),rs.getString("placas"),rs.getString("fecha_impresion"),rs.getString("fecha_vencimiento"),rs.getString("estado"));
+           
+            rs.close();
+            return tarjeton;
+            
+        }catch (SQLException e){
+            System.out.println("Hubo un error al buscar tarjeton");
+            e.printStackTrace();
+            return null;
+        }
+        
+    }
 }

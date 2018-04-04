@@ -5,16 +5,27 @@
  */
 package uhv1.Vistas;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import uhv1.Negocio.ControlCancelaTarjeton;
+import uhv1.Negocio.Tarjeton;
+
 /**
  *
- * @author ROJO GOMEZ
+ * @author adrianags
  */
 public class VentanaCancelaTarjeton extends javax.swing.JFrame {
 
     /**
      * Creates new form VentanaCancelaTarjeton
      */
-    public VentanaCancelaTarjeton() {
+    
+    ControlCancelaTarjeton control; 
+    Tarjeton tar[];
+    public VentanaCancelaTarjeton( ControlCancelaTarjeton control, Tarjeton tar[]) {
+        this.control=control;
+        this.tar=tar;
+        
         initComponents();
     }
 
@@ -28,68 +39,211 @@ public class VentanaCancelaTarjeton extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabelCancelaTarjeton = new javax.swing.JLabel();
+        jButtonAceptar = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jLabelNumEstacion = new javax.swing.JLabel();
+        jLabelNumEstaciona = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabelCancelaTarjeton.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabelCancelaTarjeton.setText("Cancela tarjetón");
 
+        jButtonAceptar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButtonAceptar.setText("Aceptar");
+        jButtonAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAceptarActionPerformed(evt);
+            }
+        });
+
+        jButton2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jTextField1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jLabelNumEstacion.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabelNumEstacion.setText("Ingresa el número de estacionamiento del tarjetón a cancelar");
+
+        jLabelNumEstaciona.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabelNumEstaciona.setText("Número de estacionamiento: ");
+
+        jButton1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jButton1.setText("Tarjetones");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Num. Estacionamiento", "Placas", "Estado"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(143, 143, 143)
+                .addGap(195, 195, 195)
                 .addComponent(jLabelCancelaTarjeton)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabelNumEstacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(65, 65, 65))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabelNumEstaciona)
+                        .addGap(33, 33, 33)
+                        .addComponent(jTextField1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(159, 159, 159)
+                        .addComponent(jButton1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addComponent(jButtonAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(69, 69, 69))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(43, 43, 43)
                 .addComponent(jLabelCancelaTarjeton)
-                .addContainerGap(253, Short.MAX_VALUE))
+                .addGap(25, 25, 25)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addComponent(jLabelNumEstacion, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNumEstaciona))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAceptar)
+                    .addComponent(jButton2))
+                .addGap(59, 59, 59))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaCancelaTarjeton.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaCancelaTarjeton.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaCancelaTarjeton.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaCancelaTarjeton.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jButtonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAceptarActionPerformed
+        // TODO add your handling code here:
+        int i=0; 
+        int num;
+        int id;
+        int valor;
+        if(jTextField1.getText().isEmpty()){
+             JOptionPane.showMessageDialog (null, "Debes ingresar un numero de estacionamiento");  
+                
+        }else{
+            id=tar[i].getId();
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaCancelaTarjeton().setVisible(true);
+            num = Integer.parseInt(jTextField1.getText());
+            valor=control.advertirCancelarTarjeton(num,id);
+            
+            if(valor ==2){
+                setVisible(false);
             }
-        });
-    }
+        }
+        
+              
+    }//GEN-LAST:event_jButtonAceptarActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        control.mandarControlGestionTarjeton();
+        setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+               
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+            // TODO add your handling code here:
+            
+            DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+            Object [] fila = new Object[3];
+            Object [] fila2 = new Object[3];
+            int i=0;
+            
+            if(tar.length==2){
+            
+                    fila[i]= tar[i].getNum_estacionamiento();
+                    fila[i+1]=tar[i].getPlacas();
+                    fila[i+2]=tar[i].getEstado();
+                    
+                    fila2[i]=tar[i+1].getNum_estacionamiento();
+                    fila2[i+1]=tar[i+1].getPlacas();
+                    fila2[i+2]=tar[i+1].getEstado();
+                    
+                    modelo.addRow(fila);
+                    modelo.addRow(fila2);
+                    
+            }else {
+                if(tar.length==1){
+                    fila[i]= tar[i].getNum_estacionamiento();
+                    fila[i+1]=tar[i].getPlacas();
+                    fila[i+2]=tar[i].getEstado();
+                    
+                    modelo.addRow(fila);
+                }
+            }       
+          
+            
+            
+            
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonAceptar;
     private javax.swing.JLabel jLabelCancelaTarjeton;
+    private javax.swing.JLabel jLabelNumEstacion;
+    private javax.swing.JLabel jLabelNumEstaciona;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
