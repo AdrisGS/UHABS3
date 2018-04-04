@@ -36,7 +36,7 @@ public class ControlGestionTarjeton {
     
     public void altaTarjeton(){
         ControlAltaTarjeton cat= new ControlAltaTarjeton();
-        cat.inicia();
+        cat.inicia(res);
     }
     
     public void cancelarTarjeton(){

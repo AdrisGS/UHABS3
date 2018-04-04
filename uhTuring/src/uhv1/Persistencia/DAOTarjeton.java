@@ -9,6 +9,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import uhv1.Negocio.ControlAltaTarjeton;
+import uhv1.Negocio.Casa;
+import uhv1.Negocio.Responsable;
 import uhv1.Negocio.Tarjeton;
 
 /**
@@ -52,7 +55,55 @@ public class DAOTarjeton {
             return null;
         }
     }
+
+    public void bajaTarjeton(Tarjeton ton, Responsable hab) {
+
+        try {
+            Statement statement = ManejadorBD.dameConnection().createStatement();
+
+            statement.execute("UPDATE tarjeton SET estado='" + ton.getEstado()
+                    + "'  where num_estacionamiento = '" + ton.getNum_estacionamiento()+ "';"
+            );
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
+     // agregaTarjeton recibe una inatancia de Responsable y otra de tarjeton para agregar el registro a la tabla tarjeton
+    public boolean agregaTarjeton(Responsable hab, Tarjeton tarj) throws SQLException{
+        int contActivos = 0;//Cuenta de los tarjetones encontrados
+        //String para realizar la consulta sobre los tarjetones con estado Activo.
+        String queryActivos = "SELECT * FROM tarjeton WHERE Habitantes_idHabitante = "+hab.getId()+" AND estado = 'Activo'";
+        Statement statement = ManejadorBD.dameConnection().createStatement();
+        ResultSet rs = statement.executeQuery(queryActivos);//instancia de resultado de la consulta
+        //Mientras existan elementos en la consulta se incrementa el contador
+        while(rs.next()){
+            contActivos++;
+        }
+        System.out.println("Numero de tarjetones activos: "+contActivos);
+        //En el caso de el número de tarjetones Activos sea menor a 2 se agrega el tarjetón a la base de datos
+        if(contActivos<2){ 
+            ControlAltaTarjeton cat = new ControlAltaTarjeton();//Instancia para regresar avisos 
+            try {
+                System.out.println(tarj.getFecha_impresion());
+                String insertaSQL = "Insert INTO tarjeton(Habitantes_idHabitante, placas, fecha_impresion, fecha_vencimiento, estado) VALUES ("+hab.getId()+", '"+tarj.getPlacas()+"', '"+tarj.getFecha_impresion()+"', '"+tarj.getFecha_vencimiento()+"', '"+tarj.getEstado()+"')";
+                statement.execute(insertaSQL);
+                System.out.println("Se ha agregado Tarjetón correctamente");
+                //Una vez que se agregó el tarjetón a la base de datos se retorna true 
+                return (true);
+
+            } catch (SQLException e) {
+               cat.errorDAO();
+               e.printStackTrace();
+               return (false);
+            }
+        }
+        else{
+            //En caso que se encuentren 2 o más tarjetones Activos se retorna false
+            return (false);
+        }
+    }   
+  
     /*
      En este metodo se le manda  el tarjeton de dicho habitante
      para que su estado del tarjeton cambie a cancelado
