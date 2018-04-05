@@ -10,12 +10,17 @@ En la tercera prueba se intenta asignar un tercer tarjeton al mismo habitante pe
 el sistema retorna false.
 */
 
-package uhv1.Negocio;
+package test.uhv1.Negocio;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+import uhv1.Negocio.Casa;
+import uhv1.Negocio.ControlAltaTarjeton;
+import uhv1.Negocio.Responsable;
 import static org.junit.Assert.*;
+import org.junit.BeforeClass;
+import uhv1.Negocio.Tarjeton;
+import uhv1.Persistencia.DAOTarjeton;
 
 /**
  *
@@ -26,8 +31,18 @@ public class ControlAltaTarjetonTest {
     public ControlAltaTarjetonTest() {
     }
     
-    @Before
-    public void setUp() {
+    @BeforeClass
+    public static void setUp() {
+        
+        DAOTarjeton daot = new DAOTarjeton();
+        Casa casa = new Casa(1, "", 0);
+        Responsable hab = new Responsable(100, "", "", "", 0, casa, 0);
+        Tarjeton listaTarjetones[] = daot.buscaTarjeton(100);
+        for (int i = 0; i < listaTarjetones.length; i++) {
+            System.out.println(listaTarjetones[i]+" ,  ");
+            Tarjeton tardel = new Tarjeton(0, listaTarjetones[i].getNum_estacionamiento(), "", "", "", "Cancelado");
+            daot.bajaTarjeton(tardel, hab);
+        } 
     }
     
     @After
@@ -39,6 +54,8 @@ public class ControlAltaTarjetonTest {
      * Test of recibeDatosFormulario method, of class ControlAltaTarjeton.
      * Esta prueba instancia un Responsable con identificador 100 y Agrega un Tarjeton a la base de datos
      */
+    
+    
     @Test
     public void testRecibeDatosFormulario1() throws Exception {
         System.out.println("Inicia prueba recibeDatosFormulario");

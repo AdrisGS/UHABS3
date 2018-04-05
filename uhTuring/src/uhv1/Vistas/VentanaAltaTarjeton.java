@@ -14,7 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import uhv1.ControlPrincipal;
-import uhv1.Negocio.ControlVentanaAltaTarjeton;
+import uhv1.Negocio.ControlAltaTarjeton;
 import uhv1.Negocio.Responsable;
 
 //Clase VentanaAltaTarjeton implementa de JFrame los métodos necesarios para visualizar la
@@ -24,6 +24,9 @@ public class VentanaAltaTarjeton extends javax.swing.JFrame {
     SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
     Responsable hab;
     Date fechaVencimiento = new Date();
+    
+    public VentanaAltaTarjeton(){//Constructor vacio
+    }
     
     
     public VentanaAltaTarjeton(Responsable hab) throws ParseException {
@@ -35,6 +38,22 @@ public class VentanaAltaTarjeton extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(this);
     }
+     //En caso que se halle un error en la asignación del DAO despliega este aviso
+    public void ventanaError(){
+    JOptionPane.showMessageDialog(null, "Aviso: No se realizó el registro del Tarjetón.", "Aviso:",JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    //ventanaExito recibe de ControlAltaTarjetón true si se realizó agregó correctamente
+    public void ventanaExito(boolean result){
+        if(result==true){
+            JOptionPane.showMessageDialog(null, "Aviso: Se realizó el registro correcto del Alta del Tarjetón al habitante", "Aviso:",JOptionPane.INFORMATION_MESSAGE);
+        }else{
+            //En caso de recibir false de ControlAltaTarjetón se despliegiega el aviso de que existen 2 o más tarjetones activos
+            JOptionPane.showMessageDialog(null, "Aviso: El avitante ya cuenta con 2 Tarjetones activos\nNo se realizó el registro del Tarjetón.", "Aviso:",JOptionPane.INFORMATION_MESSAGE);           
+        }
+        ControlPrincipal cp = new ControlPrincipal();
+        cp.inicia();
+    } 
     
     
     @SuppressWarnings("unchecked")
@@ -446,12 +465,13 @@ public class VentanaAltaTarjeton extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Aviso: El campo placas es requerido ", "Aviso:", JOptionPane.WARNING_MESSAGE);  
         }
         else{
-        ControlVentanaAltaTarjeton cvat = new ControlVentanaAltaTarjeton();
-        try {
-            cvat.enviaDatosFormulario(hab, campo_placas.getText());
-        } catch (SQLException ex) {
-            Logger.getLogger(VentanaAltaTarjeton.class.getName()).log(Level.SEVERE, null, ex);
-        }
+         ControlAltaTarjeton cat = new ControlAltaTarjeton();
+            try {
+                //se envian los datos que recibe del formulario
+                cat.recibeDatosFormulario(hab, campo_placas.getText());
+            } catch (SQLException ex) {
+                Logger.getLogger(VentanaAltaTarjeton.class.getName()).log(Level.SEVERE, null, ex);
+            }
         dispose();
         }
     }//GEN-LAST:event_boton_aceptarActionPerformed
