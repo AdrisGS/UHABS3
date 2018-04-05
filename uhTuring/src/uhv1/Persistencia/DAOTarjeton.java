@@ -83,7 +83,6 @@ public class DAOTarjeton {
         System.out.println("Numero de tarjetones activos: "+contActivos);
         //En el caso de el número de tarjetones Activos sea menor a 2 se agrega el tarjetón a la base de datos
         if(contActivos<2){ 
-            ControlAltaTarjeton cat = new ControlAltaTarjeton();//Instancia para regresar avisos 
             try {
                 System.out.println(tarj.getFecha_impresion());
                 String insertaSQL = "Insert INTO tarjeton(Habitantes_idHabitante, placas, fecha_impresion, fecha_vencimiento, estado) VALUES ("+hab.getId()+", '"+tarj.getPlacas()+"', '"+tarj.getFecha_impresion()+"', '"+tarj.getFecha_vencimiento()+"', '"+tarj.getEstado()+"')";
@@ -93,7 +92,6 @@ public class DAOTarjeton {
                 return (true);
 
             } catch (SQLException e) {
-               cat.errorDAO();
                e.printStackTrace();
                return (false);
             }
