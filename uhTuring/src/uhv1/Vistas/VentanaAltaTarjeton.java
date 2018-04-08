@@ -49,7 +49,7 @@ public class VentanaAltaTarjeton extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Aviso: Se realizó el registro correcto del Alta del Tarjetón al habitante", "Aviso:",JOptionPane.INFORMATION_MESSAGE);
         }else{
             //En caso de recibir false de ControlAltaTarjetón se despliegiega el aviso de que existen 2 o más tarjetones activos
-            JOptionPane.showMessageDialog(null, "Aviso: El avitante ya cuenta con 2 Tarjetones activos\nNo se realizó el registro del Tarjetón.", "Aviso:",JOptionPane.INFORMATION_MESSAGE);           
+            JOptionPane.showMessageDialog(null, "Aviso: El habitante ya cuenta con 2 Tarjetones activos\nNo se realizó el registro del Tarjetón.", "Aviso:",JOptionPane.INFORMATION_MESSAGE);           
         }
         ControlPrincipal cp = new ControlPrincipal();
         cp.inicia();
@@ -104,25 +104,33 @@ public class VentanaAltaTarjeton extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel1.setText("idHabitante:");
 
+        jLabel2.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel2.setText("Nombre:");
 
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel3.setText("Apellido Paterno:");
 
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel4.setText("Apellido Materno:");
 
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel5.setText("Teléfono:");
 
+        jLabel6.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel6.setText("Saldo:");
 
         campo_idHabitante.setEditable(false);
+        campo_idHabitante.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         campo_idHabitante.setText(Integer.toString(hab.getId())
         );
         campo_idHabitante.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         campo_idHabitante.setEnabled(false);
 
         campo_nombre.setEditable(false);
+        campo_nombre.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         campo_nombre.setText(hab.getNombre());
         campo_nombre.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         campo_nombre.setEnabled(false);
@@ -133,6 +141,7 @@ public class VentanaAltaTarjeton extends javax.swing.JFrame {
         });
 
         campo_aPat.setEditable(false);
+        campo_aPat.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         campo_aPat.setText(hab.getaPat());
         campo_aPat.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         campo_aPat.setEnabled(false);
@@ -143,11 +152,13 @@ public class VentanaAltaTarjeton extends javax.swing.JFrame {
         });
 
         campo_aMat.setEditable(false);
+        campo_aMat.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         campo_aMat.setText(hab.getaMat());
         campo_aMat.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         campo_aMat.setEnabled(false);
 
         campo_telefono.setEditable(false);
+        campo_telefono.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         campo_telefono.setText(Float.toString(hab.getTelefono()));
         campo_telefono.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         campo_telefono.setEnabled(false);
@@ -158,6 +169,7 @@ public class VentanaAltaTarjeton extends javax.swing.JFrame {
         });
 
         campo_saldo.setEditable(false);
+        campo_saldo.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         campo_saldo.setText(Float.toString(hab.getSaldo()));
         campo_saldo.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         campo_saldo.setEnabled(false);
@@ -218,6 +230,7 @@ public class VentanaAltaTarjeton extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         campo_idCasa.setEditable(false);
+        campo_idCasa.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         campo_idCasa.setText(Integer.toString(hab.getCasa().getId()));
         campo_idCasa.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         campo_idCasa.setEnabled(false);
@@ -228,19 +241,24 @@ public class VentanaAltaTarjeton extends javax.swing.JFrame {
         });
 
         campo_seccion.setEditable(false);
+        campo_seccion.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         campo_seccion.setText(hab.getCasa().getSeccion());
         campo_seccion.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         campo_seccion.setEnabled(false);
 
         campo_numero.setEditable(false);
+        campo_numero.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         campo_numero.setText(Integer.toString(hab.getCasa().getNumero()));
         campo_numero.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         campo_numero.setEnabled(false);
 
+        jLabel13.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel13.setText("Número:");
 
+        jLabel12.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel12.setText("Sección:");
 
+        jLabel11.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel11.setText("idCasa:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -261,7 +279,7 @@ public class VentanaAltaTarjeton extends javax.swing.JFrame {
                         .addComponent(jLabel13)
                         .addGap(13, 13, 13)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(campo_numero, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                    .addComponent(campo_numero)
                     .addComponent(campo_seccion, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(campo_idCasa, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -286,20 +304,26 @@ public class VentanaAltaTarjeton extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Registro de Tarjeton"));
 
+        jLabel7.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel7.setText("idNumEstacionamiento:");
 
+        jLabel8.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel8.setText("Placas:");
 
+        jLabel9.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel9.setText("Fecha de impresión:");
 
+        jLabel10.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel10.setText("Fecha de vencimiento:");
 
         campo_idNumEstacionamiento.setEditable(false);
+        campo_idNumEstacionamiento.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         campo_idNumEstacionamiento.setText("Nuevo");
         campo_idNumEstacionamiento.setToolTipText("");
         campo_idNumEstacionamiento.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         campo_idNumEstacionamiento.setEnabled(false);
 
+        campo_placas.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         campo_placas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 campo_placasActionPerformed(evt);
@@ -307,19 +331,23 @@ public class VentanaAltaTarjeton extends javax.swing.JFrame {
         });
 
         campo_fechaImpresion.setEditable(false);
+        campo_fechaImpresion.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         campo_fechaImpresion.setText(df.format(fechaHoy));
         campo_fechaImpresion.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         campo_fechaImpresion.setEnabled(false);
 
         campo_fechaVencimiento.setEditable(false);
+        campo_fechaVencimiento.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         campo_fechaVencimiento.setText(df.format(fechaVencimiento)
         );
         campo_fechaVencimiento.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         campo_fechaVencimiento.setEnabled(false);
 
+        jLabel15.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel15.setText("Estado:");
 
         campo_estado.setEditable(false);
+        campo_estado.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         campo_estado.setText("Activo");
         campo_estado.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         campo_estado.setEnabled(false);
@@ -335,10 +363,10 @@ public class VentanaAltaTarjeton extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
                             .addComponent(jLabel15))
-                        .addGap(33, 33, 33)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(campo_estado)
-                            .addComponent(campo_fechaImpresion, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(38, 38, 38)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(campo_fechaImpresion, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campo_estado, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
@@ -383,8 +411,10 @@ public class VentanaAltaTarjeton extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jLabel17.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel17.setText("Datos de la vivienda");
 
+        jLabel14.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel14.setText("Datos del habitante");
 
         boton_aceptar.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -419,8 +449,8 @@ public class VentanaAltaTarjeton extends javax.swing.JFrame {
                     .addComponent(jLabel14)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(161, 161, 161)
-                        .addComponent(boton_aceptar)
-                        .addGap(95, 95, 95)
+                        .addComponent(boton_aceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(89, 89, 89)
                         .addComponent(boton_cancelar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
@@ -454,7 +484,7 @@ public class VentanaAltaTarjeton extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(boton_aceptar)
                     .addComponent(boton_cancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         pack();
